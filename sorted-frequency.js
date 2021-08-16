@@ -1,5 +1,4 @@
 function sortedFrequency(arr, num) {
-  console.log("sortedFrequency running");
   let leftBd = 0,
     rightBd = arr.length - 1; //set valid search window / bounds
 
@@ -14,8 +13,10 @@ function sortedFrequency(arr, num) {
     //else if pointer is more than num look left
     else if (arr[pointer] > num) rightBd = pointer - 1;
     //else if pointer is num and has a !num to the left of it THAT is our leftIdx
-    else if (arr[pointer] === num && arr[pointer - 1] !== num)
+    else if (arr[pointer] === num && arr[pointer - 1] !== num) {
       leftIdx = pointer;
+      break;
+    }
     //else look left again
     else rightBd = pointer - 1;
   }
@@ -27,8 +28,10 @@ function sortedFrequency(arr, num) {
     //else if pointer is more than num look left
     else if (arr[pointer] > num) rightBd = pointer - 1;
     //else if pointer is num and has a !num to the right of it THAT is our rightIdx
-    else if (arr[pointer] === num && arr[pointer + 1] !== num)
+    else if (arr[pointer] === num && arr[pointer + 1] !== num) {
       rightIdx = pointer;
+      break;
+    }
     //else look right again
     else leftBd = pointer + 1;
   }

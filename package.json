@@ -4,7 +4,7 @@
   "description": "",
   "main": "count-zeroes.js",
   "scripts": {
-    "test": "jest"
+    "test": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand"
   },
   "keywords": [],
   "author": "",
