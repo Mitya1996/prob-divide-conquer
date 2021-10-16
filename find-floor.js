@@ -1,32 +1,20 @@
-/**
- * Write a function called findFloor which accepts a sorted array and a value x, and returns the floor of x in the array. The floor of x in an array is the largest element in the array which is smaller than or equal to x. If the floor does not exist, return -1.
- * @param {!Array} arr
- * @param {!number} x
- * @return {!number}
- */
+function findFloor(arr, num, low = 0, high = arr.length - 1) {
+  if (low > high) return -1;
+  if (num >= arr[high]) return arr[high];
 
-function findFloor(arr, x) {
-  //binary search
-  let left = 0;
-  let right = arr.length - 1;
-  let mid = (right + left) / 2;
-  while (left < right) {
-    //if mid is > x and the number to the left of mid is less than x return num to the left of mid
-    if (mid > x && arr[mid - 1] < x) return arr[mid - 1];
-    //if the last num in the array is smaller than x return the last num in arr
-    if (arr[arr.length - 1] < x) return arr[arr.length - 1];
-    //if the number to the left is smaller than x, then eliminate left side / aka mid+1 is the new left
-    if (arr[mid - 1] < x) {
-      left = mid + 1;
-    }
-    //if the number to the left is bigger than x, then eliminate the right side / mid-1 is the new right
-    else if (arr[mid - 1] > x) {
-      right = mid - 1;
-    }
-    console.log(left);
-    console.log(right);
-    console.log(mid);
+  let mid = Math.floor((low + high) / 2)
+
+  if (arr[mid] === num) return arr[mid];
+
+  if (mid > 0 && arr[mid - 1] <= num && num < arr[mid]) {
+    return arr[mid - 1];
   }
+
+  if (num < arr[mid]) {
+    return findFloor(arr, num, low, mid - 1);
+  }
+
+  return findFloor(arr, num, mid + 1, high)
 }
 
-module.exports = findFloor;
+module.exports = findFloor
